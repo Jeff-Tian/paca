@@ -1,0 +1,35 @@
+<ion-navbar *navbar>
+    <ion-title>利率转换</ion-title>
+</ion-navbar>
+
+<ion-content padding class="page1">
+    <ion-item>
+        <ion-label stacked>年利率: {{interpretInterestRate(model.annualInterestRate) | number: '1.0-2'}}; {{interpretInterestRate(model.annualInterestRate)
+            | percent: '1.0-2'}}
+        </ion-label>
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('annualInterestRateChanged')"
+            [(ngModel)]="model.annualInterestRate" clearInput placeholder="年利率"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>月利率: {{interpretInterestRate(model.monthlyInterestRate) | number: '1.0-2'}}; {{interpretInterestRate(model.monthlyInterestRate)|percent:
+            '1.0-2'}}
+        </ion-label>
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('monthlyInterestRateChanged')"
+            [(ngModel)]="model.monthlyInterestRate" clearInput placeholder="月利率"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>日利率: {{interpretInterestRate(model.dailyInterestRate)|number: '1.0-2'}}; {{interpretInterestRate(model.dailyInterestRate)|percent:'1.0-2'}}
+        </ion-label>
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('dailyInterestRateChanged')"
+            [(ngModel)]="model.dailyInterestRate" clearInput placeholder="日利率"></ion-input>
+    </ion-item>
+    <ion-item></ion-item>
+    <ion-item>
+        <ion-label stacked>简单模式（不使用复利模式）</ion-label>
+        <ion-toggle [(ngModel)]="model.simplifiedMode" (ionChange)="updateValues()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>纯数字输入模式（不能输入%）</ion-label>
+        <ion-toggle [(ngModel)]="model.numberMode"></ion-toggle>
+    </ion-item>
+</ion-content>
