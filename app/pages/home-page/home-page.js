@@ -20,6 +20,18 @@ export class HomePage {
             numberMode: true
         };
 
+        this.numberFormat = {
+            annualInterestRate: null,
+            monthlyInterestRate: null,
+            dailyInterestRate: null
+        };
+
+        this.percentFormat = {
+            annualInterestRate: null,
+            monthlyInterestRate: null,
+            dailyInterestRate: null
+        };
+
         this.source = '';
     }
 
@@ -111,11 +123,25 @@ export class HomePage {
         this.source = theSource;
     }
 
+    updateDisplayFor(model) {
+        let r = this.interpretInterestRate(this.model[model]);
+        this.numberFormat[model] = r.toFixed(2);
+        this.percentFormat[model] = (r * 100).toFixed(2) + '%';
+    }
+
+    updateDisplay() {
+        this.updateDisplayFor('annualInterestRate');
+        this.updateDisplayFor('monthlyInterestRate');
+        this.updateDisplayFor('dailyInterestRate');
+    }
+
     updateValues() {
         console.log('changing, simple = ', this.model.simplifiedMode);
         console.log('number mode = ', this.model.numberMode);
         if (typeof this[this.source] === 'function') {
             this[this.source]();
+
+            this.updateDisplay();
         }
     }
 }

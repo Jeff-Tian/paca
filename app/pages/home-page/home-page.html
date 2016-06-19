@@ -1,26 +1,24 @@
 <ion-navbar *navbar>
-    <ion-title>利率转换</ion-title>
+    <ion-title><button clear (click)="updateValues()"><ion-icon name="refresh"></ion-icon></button></ion-title>
 </ion-navbar>
 
 <ion-content padding class="page1">
     <ion-item>
-        <ion-label stacked>年利率: {{interpretInterestRate(model.annualInterestRate) | number: '1.0-2'}}; {{interpretInterestRate(model.annualInterestRate)
-            | percent: '1.0-2'}}
+        <ion-label stacked>年利率: {{(numberFormat.annualInterestRate)}}; {{percentFormat.annualInterestRate}}
         </ion-label>
-        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('annualInterestRateChanged')"
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (change)="updateValues()" (focus)="changeSource('annualInterestRateChanged')"
             [(ngModel)]="model.annualInterestRate" clearInput placeholder="年利率"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label stacked>月利率: {{interpretInterestRate(model.monthlyInterestRate) | number: '1.0-2'}}; {{interpretInterestRate(model.monthlyInterestRate)|percent:
-            '1.0-2'}}
+        <ion-label stacked>月利率: {{(numberFormat.monthlyInterestRate)}}; {{percentFormat.monthlyInterestRate}}
         </ion-label>
-        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('monthlyInterestRateChanged')"
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (change)="updateValues()" (focus)="changeSource('monthlyInterestRateChanged')"
             [(ngModel)]="model.monthlyInterestRate" clearInput placeholder="月利率"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label stacked>日利率: {{interpretInterestRate(model.dailyInterestRate)|number: '1.0-2'}}; {{interpretInterestRate(model.dailyInterestRate)|percent:'1.0-2'}}
+        <ion-label stacked>日利率: {{(numberFormat.dailyInterestRate)}}; {{percentFormat.dailyInterestRate}}
         </ion-label>
-        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (keyup)="updateValues()" (focus)="changeSource('dailyInterestRateChanged')"
+        <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (change)="updateValues()" (focus)="changeSource('dailyInterestRateChanged')"
             [(ngModel)]="model.dailyInterestRate" clearInput placeholder="日利率"></ion-input>
     </ion-item>
     <ion-item></ion-item>
