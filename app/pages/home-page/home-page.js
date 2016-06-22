@@ -35,7 +35,7 @@ export class HomePage {
         this.source = '';
     }
 
-    interpretInterestRate(r) {
+    static interpretInterestRate(r) {
         if (!r) {
             return 0;
         }
@@ -102,19 +102,19 @@ export class HomePage {
     }
 
     annualInterestRateChanged() {
-        let r = this.interpretInterestRate(this.model.annualInterestRate);
+        let r = HomePage.interpretInterestRate(this.model.annualInterestRate);
         this.model.monthlyInterestRate = this.monthlyRateOfAnnual(r);
         this.model.dailyInterestRate = this.dailyRateOfAnnual(r);
     }
 
     monthlyInterestRateChanged() {
-        let r = this.interpretInterestRate(this.model.monthlyInterestRate);
+        let r = HomePage.interpretInterestRate(this.model.monthlyInterestRate);
         this.model.annualInterestRate = this.annualRateOfMonthly(r);
         this.model.dailyInterestRate = this.dailyRateOfMonthly(r);
     }
 
     dailyInterestRateChanged() {
-        let r = this.interpretInterestRate(this.model.dailyInterestRate);
+        let r = HomePage.interpretInterestRate(this.model.dailyInterestRate);
         this.model.annualInterestRate = this.annualRateOfDaily(r);
         this.model.monthlyInterestRate = this.monthlyRateOfDaily(r);
     }
@@ -124,7 +124,7 @@ export class HomePage {
     }
 
     updateDisplayFor(model) {
-        let r = this.interpretInterestRate(this.model[model]);
+        let r = HomePage.interpretInterestRate(this.model[model]);
         this.numberFormat[model] = r.toFixed(2);
         this.percentFormat[model] = (r * 100).toFixed(2) + '%';
     }
@@ -136,8 +136,6 @@ export class HomePage {
     }
 
     updateValues() {
-        console.log('changing, simple = ', this.model.simplifiedMode);
-        console.log('number mode = ', this.model.numberMode);
         if (typeof this[this.source] === 'function') {
             this[this.source]();
 

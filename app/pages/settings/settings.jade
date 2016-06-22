@@ -1,0 +1,8 @@
+ion-navbar('*navbar'="")
+    ion-title 设置
+
+ion-content(padding="", class="")
+    ion-item
+        ion-label(stacked="")
+            | 纯数字输入模式（不能输入）
+        ion-toggle('[(ngModel)]'="model.numberMode")

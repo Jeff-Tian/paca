@@ -1,0 +1,27 @@
+ion-navbar('*navbar'="")
+    ion-title
+        button(clear="", '(click)'="updateValues()")
+            ion-icon(name="refresh")
+ion-content(padding="", class="page1")
+    ion-item
+        ion-label
+            | 期初借入(元):
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('beginIn')", '[(ngModel)]'="model.beginIn", clearInput="", placeholder="期初借入 xxx 元")
+    ion-item
+        ion-label
+            | 借贷时长(以月为单位):
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('duration')", '[(ngModel)]'="model.duration", clearInput="", placeholder="借贷时长(以月为单位)")
+    ion-item
+        ion-label
+            | 期末待还(元):
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('endOut')", '[(ngModel)]'="model.endOut", clearInput="", placeholder="期末待还 xxx 元")
+    ion-item
+        ion-label 还款方式:
+        ion-select('[(ngModel)]'="model.payBackMethod", placeholder="还款方式", '(ionChange)'="updateValues()")
+            ion-option('*ngFor'="let m of payBackMethods", value="m.key",checked="m.key === model.payBackMethod") {{m.value}}
+    ion-item
+        ion-label 利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('interestRate')", '[(ngModel)]'="model.interestRate", clearInput="", placeholder="利率")
+    ion-item
+        ion-label 利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('interest')", '[(ngModel)]'="model.interest", clearInput="", placeholder="利息")

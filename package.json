@@ -43,7 +43,7 @@
     }
   ],
   "name": "paca",
-  "description": "paca: An Ionic project",
+  "description": "paca",
   "scripts": {
     "test": "gulp --gulpfile test/gulpfile.ts --cwd ./ unit-test"
   }
