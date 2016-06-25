@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import {Settings} from '../settings/settings';
 
 @Component({
     templateUrl: 'build/pages/home-page/home-page.html'
@@ -33,6 +34,12 @@ export class HomePage {
         };
 
         this.source = '';
+        this.model.numberMode = Settings.get().numberMode;
+
+        let self = this;
+        Settings.updated(function () {
+            self.model.numberMode = Settings.get().numberMode;
+        });
     }
 
     static interpretInterestRate(r) {

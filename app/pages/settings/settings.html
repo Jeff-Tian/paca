@@ -1,1 +1,1 @@
-<ion-navbar *navbar=""><ion-title>设置</ion-title></ion-navbar><ion-content padding=""><ion-item><ion-label stacked="">纯数字输入模式（不能输入）</ion-label><ion-toggle [(ngModel)]="model.numberMode"></ion-toggle></ion-item></ion-content>
+<ion-navbar *navbar=""><ion-title>设置</ion-title></ion-navbar><ion-content padding=""><ion-item><ion-label stacked="">纯数字输入模式（不能输入%）</ion-label><ion-toggle [(ngModel)]="model.numberMode" (ionChange)="saveSettings()"></ion-toggle></ion-item></ion-content>
