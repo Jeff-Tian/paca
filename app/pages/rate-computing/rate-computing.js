@@ -32,7 +32,7 @@ export class RateComputing {
     }
 
     updateValues() {
-
+        console.log(this.model);
     }
 
     changeSource(source) {

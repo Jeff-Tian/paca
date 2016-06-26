@@ -18,7 +18,7 @@ ion-content(padding="", class="page1")
     ion-item
         ion-label 还款方式:
         ion-select('[(ngModel)]'="model.payBackMethod", placeholder="还款方式", '(ionChange)'="updateValues()")
-            ion-option('*ngFor'="let m of payBackMethods", value="m.key",checked="m.key === model.payBackMethod") {{m.value}}
+            ion-option('*ngFor'="let m of payBackMethods", value="{{m.key}}") {{m.value}}
     ion-item
         ion-label 利率:
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('interestRate')", '[(ngModel)]'="model.interestRate", clearInput="", placeholder="利率")

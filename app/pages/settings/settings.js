@@ -20,8 +20,10 @@ export class Settings {
     }
 
     static save(settings) {
+        var oldSettings = Settings.get();
+
         settings = settings || {};
-        localStorage.setItem('settings', JSON.stringify(settings));
+        localStorage.setItem('settings', JSON.stringify(Object.assign({}, oldSettings, settings)));
     }
 
     static get() {

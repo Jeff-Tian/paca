@@ -17,8 +17,8 @@ export class HomePage {
             monthlyInterestRate: null,
             dailyInterestRate: null,
 
-            simplifiedMode: true,
-            numberMode: true
+            simplifiedMode: Settings.get().simplifiedMode,
+            numberMode: Settings.get().simplifiedMode
         };
 
         this.numberFormat = {
@@ -34,10 +34,10 @@ export class HomePage {
         };
 
         this.source = '';
-        this.model.numberMode = Settings.get().numberMode;
 
         let self = this;
         Settings.updated(function () {
+            self.model.simplifiedMode = Settings.get().simplifiedMode;
             self.model.numberMode = Settings.get().numberMode;
         });
     }
