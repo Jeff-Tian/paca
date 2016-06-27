@@ -149,4 +149,12 @@ export class HomePage {
             this.updateDisplay();
         }
     }
+
+    updateSettingsAndValues() {
+        Settings.save({
+            simplifiedMode: this.model.simplifiedMode
+        });
+
+        this.updateValues();
+    }
 }

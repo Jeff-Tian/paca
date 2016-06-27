@@ -20,8 +20,20 @@ ion-content(padding="", class="page1")
         ion-select('[(ngModel)]'="model.payBackMethod", placeholder="还款方式", '(ionChange)'="updateValues()")
             ion-option('*ngFor'="let m of payBackMethods", value="{{m.key}}") {{m.value}}
     ion-item
-        ion-label 利率:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('interestRate')", '[(ngModel)]'="model.interestRate", clearInput="", placeholder="利率")
+        ion-label 总利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('totalInterestRate')", '[(ngModel)]'="model.totalInterestRate", clearInput="", placeholder="利率")
     ion-item
-        ion-label 利息:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('interest')", '[(ngModel)]'="model.interest", clearInput="", placeholder="利息")
+        ion-label 总利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('totalInterest')", '[(ngModel)]'="model.totalInterest", clearInput="", placeholder="利息")
+    ion-item
+        ion-label 月利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterestRate')", '[(ngModel)]'="model.monthlyInterestRate", clearInput="", placeholder="月利率")
+    ion-item
+        ion-label 月利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterest')", '[(ngModel)]'="model.monthlyInterest", clearInput="", placeholder="月利息")
+    ion-item
+        ion-label 年利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterestRate')", '[(ngModel)]'="model.annualInterestRate", clearInput="", placeholder="年利率")
+    ion-item
+        ion-label 年利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterest')", '[(ngModel)]'="model.annualInterest", clearInput="", placeholder="年利息")

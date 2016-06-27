@@ -25,17 +25,27 @@ export class RateComputing {
             duration: 12,
             endOut: 11000,
             payBackMethod: 'one-off',
-            interestRate: 0,
-            interest: 0
+            totalInterestRate: 0,
+            totalInterest: 0,
+            monthlyInterestRate: 0,
+            monthlyInterest: 0,
+            annualInterestRate: 0,
+            annualInterest: 0
         };
         this.source = null;
     }
 
     updateValues() {
-        console.log(this.model);
+        if (typeof this[this.source] === 'function') {
+            this[this.source]();
+        }
     }
 
     changeSource(source) {
         this.source = source;
+    }
+
+    beginIn() {
+        
     }
 }
