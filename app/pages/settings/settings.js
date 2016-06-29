@@ -28,7 +28,7 @@ export class Settings {
 
     static get() {
         try {
-            return JSON.parse(localStorage.getItem('settings'));
+            return JSON.parse(localStorage.getItem('settings')) || {};
         } catch (ex) {
             return {};
         }
