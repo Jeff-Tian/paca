@@ -22,15 +22,11 @@
                    [(ngModel)]="model.monthlyInterestRate" clearInput placeholder="月利率"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label stacked>日利率: {{(numberFormat.dailyInterestRate)}}; {{percentFormat.dailyInterestRate}}
+        <ion-label stacked>日利率: {{numberFormat.dailyInterestRate}}; {{percentFormat.dailyInterestRate}};
+            {{thousandthFormat.dailyInterestRate}}; {{tenThousandthFormat.dailyInterestRate}}
         </ion-label>
         <ion-input type="{{model.numberMode ? 'number' : 'text'}}" (change)="updateValues()"
                    (focus)="changeSource('dailyInterestRateChanged')"
                    [(ngModel)]="model.dailyInterestRate" clearInput placeholder="日利率"></ion-input>
-    </ion-item>
-    <ion-item></ion-item>
-    <ion-item>
-        <ion-label stacked>简单模式（不使用复利模式）</ion-label>
-        <ion-toggle [(ngModel)]="model.simplifiedMode" (ionChange)="updateSettingsAndValues()"></ion-toggle>
     </ion-item>
 </ion-content>

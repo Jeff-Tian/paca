@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import {Settings} from '../settings/settings';
+import {Rate} from '../../finance/rate';
 
 @Component({
     templateUrl: 'build/pages/rate-computing/rate-computing.html'
@@ -33,6 +35,8 @@ export class RateComputing {
             annualInterest: 0
         };
         this.source = null;
+
+        this.beginIn();
     }
 
     updateValues() {
@@ -46,6 +50,10 @@ export class RateComputing {
     }
 
     beginIn() {
-        
+        this.model.totalInterest = this.model.endOut - this.model.beginIn;
+        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+
+        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
+        this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration);
     }
 }

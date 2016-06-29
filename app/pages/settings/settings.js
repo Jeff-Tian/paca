@@ -15,7 +15,8 @@ export class Settings {
         this._navController = _navController;
 
         this.model = {
-            numberMode: Settings.get().numberMode
+            numberMode: Settings.get().numberMode,
+            simplifiedMode: Settings.get().simplifiedMode
         };
     }
 
@@ -28,7 +29,10 @@ export class Settings {
 
     static get() {
         try {
-            return JSON.parse(localStorage.getItem('settings')) || {};
+            return JSON.parse(localStorage.getItem('settings')) || {
+                    simplifiedMode: true,
+                    numberMode: false
+                };
         } catch (ex) {
             return {};
         }

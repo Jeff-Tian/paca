@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Settings} from '../settings/settings';
+import {Rate} from '../../finance/rate';
 
 @Component({
     templateUrl: 'build/pages/home-page/home-page.html'
@@ -18,7 +19,7 @@ export class HomePage {
             dailyInterestRate: null,
 
             simplifiedMode: Settings.get().simplifiedMode,
-            numberMode: Settings.get().simplifiedMode
+            numberMode: Settings.get().numberMode
         };
 
         this.numberFormat = {
@@ -33,12 +34,22 @@ export class HomePage {
             dailyInterestRate: null
         };
 
+        this.thousandthFormat = {
+            dailyInterestRate: null
+        };
+
+        this.tenThousandthFormat = {
+            dailyInterestRate: null
+        };
+
         this.source = '';
 
         let self = this;
         Settings.updated(function () {
             self.model.simplifiedMode = Settings.get().simplifiedMode;
             self.model.numberMode = Settings.get().numberMode;
+
+            self.updateValues();
         });
     }
 
@@ -61,27 +72,11 @@ export class HomePage {
     }
 
     shortRateOfLong(r, periods) {
-        function simple(r) {
-            return r / periods;
-        }
-
-        function complex(r) {
-            return Math.pow(1 + r, 1 / periods) - 1;
-        }
-
-        return this.model.simplifiedMode ? simple(r) : complex(r);
+        return this.model.simplifiedMode ? Rate.simpleShortRateOfLong(r, periods) : Rate.complexShortRateOfLong(r, periods);
     }
 
     longRateOfShort(r, periods) {
-        function simple(r) {
-            return r * periods;
-        }
-
-        function complex(r) {
-            return Math.pow(1 + r, periods) - 1;
-        }
-
-        return this.model.simplifiedMode ? simple(r) : complex(r);
+        return this.model.simplifiedMode ? Rate.simpleLongRateOfShort(r, periods) : Rate.complexLongRateOfShort(r, periods);
     }
 
     monthlyRateOfAnnual(r) {
@@ -134,6 +129,8 @@ export class HomePage {
         let r = HomePage.interpretInterestRate(this.model[model]);
         this.numberFormat[model] = r.toFixed(2);
         this.percentFormat[model] = (r * 100).toFixed(2) + '%';
+        this.thousandthFormat[model] = (r * 1000).toFixed(2) + '‰';
+        this.tenThousandthFormat[model] = (r * 10000).toFixed(2) + '‱';
     }
 
     updateDisplay() {
@@ -148,13 +145,5 @@ export class HomePage {
 
             this.updateDisplay();
         }
-    }
-
-    updateSettingsAndValues() {
-        Settings.save({
-            simplifiedMode: this.model.simplifiedMode
-        });
-
-        this.updateValues();
     }
 }
