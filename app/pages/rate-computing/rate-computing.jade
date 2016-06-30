@@ -26,14 +26,20 @@ ion-content(padding="", class="page1")
         ion-label 总利息:
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('totalInterest')", '[(ngModel)]'="model.totalInterest", clearInput="", placeholder="利息")
     ion-item
-        ion-label 月利率:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterestRate')", '[(ngModel)]'="model.monthlyInterestRate", clearInput="", placeholder="月利率")
+        ion-label 平均年利率: {{displays.annualInterestRate.percentFormat}};
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterestRate')", '[(ngModel)]'="model.annualInterestRate", clearInput="", placeholder="平均年利率")
     ion-item
-        ion-label 月利息:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterest')", '[(ngModel)]'="model.monthlyInterest", clearInput="", placeholder="月利息")
+        ion-label 平均年利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterest')", '[(ngModel)]'="model.annualInterest", clearInput="", placeholder="平均年利息")
     ion-item
-        ion-label 年利率:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterestRate')", '[(ngModel)]'="model.annualInterestRate", clearInput="", placeholder="年利率")
+        ion-label 平均月利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterestRate')", '[(ngModel)]'="model.monthlyInterestRate", clearInput="", placeholder="平均月利率")
     ion-item
-        ion-label 年利息:
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('annualInterest')", '[(ngModel)]'="model.annualInterest", clearInput="", placeholder="年利息")
+        ion-label 平均月利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterest')", '[(ngModel)]'="model.monthlyInterest", clearInput="", placeholder="平均月利息")
+    ion-item
+        ion-label 平均日利率:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('dailyInterestRate')", '[(ngModel)]'="model.dailyInterestRate", clearInput="", placeholder="平均日利率")
+    ion-item
+        ion-label 平均日利息:
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('dailyInterest')", '[(ngModel)]'="model.dailyInterest", clearInput="", placeholder="平均日利息")

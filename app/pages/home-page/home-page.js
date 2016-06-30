@@ -53,24 +53,6 @@ export class HomePage {
         });
     }
 
-    static interpretInterestRate(r) {
-        if (!r) {
-            return 0;
-        }
-
-        var result = parseFloat(r);
-
-        for (var i = r.length - 1; i >= 0; i--) {
-            if (r[i] !== '%') {
-                break;
-            }
-
-            result /= 100;
-        }
-
-        return result;
-    }
-
     shortRateOfLong(r, periods) {
         return this.model.simplifiedMode ? Rate.simpleShortRateOfLong(r, periods) : Rate.complexShortRateOfLong(r, periods);
     }
@@ -104,19 +86,19 @@ export class HomePage {
     }
 
     annualInterestRateChanged() {
-        let r = HomePage.interpretInterestRate(this.model.annualInterestRate);
+        let r = Rate.interpretInterestRate(this.model.annualInterestRate);
         this.model.monthlyInterestRate = this.monthlyRateOfAnnual(r);
         this.model.dailyInterestRate = this.dailyRateOfAnnual(r);
     }
 
     monthlyInterestRateChanged() {
-        let r = HomePage.interpretInterestRate(this.model.monthlyInterestRate);
+        let r = Rate.interpretInterestRate(this.model.monthlyInterestRate);
         this.model.annualInterestRate = this.annualRateOfMonthly(r);
         this.model.dailyInterestRate = this.dailyRateOfMonthly(r);
     }
 
     dailyInterestRateChanged() {
-        let r = HomePage.interpretInterestRate(this.model.dailyInterestRate);
+        let r = Rate.interpretInterestRate(this.model.dailyInterestRate);
         this.model.annualInterestRate = this.annualRateOfDaily(r);
         this.model.monthlyInterestRate = this.monthlyRateOfDaily(r);
     }
@@ -126,11 +108,12 @@ export class HomePage {
     }
 
     updateDisplayFor(model) {
-        let r = HomePage.interpretInterestRate(this.model[model]);
-        this.numberFormat[model] = r.toFixed(2);
-        this.percentFormat[model] = (r * 100).toFixed(2) + '%';
-        this.thousandthFormat[model] = (r * 1000).toFixed(2) + '‰';
-        this.tenThousandthFormat[model] = (r * 10000).toFixed(2) + '‱';
+        var modelDisplays = Rate.getDisplayFormatsOf(Rate.interpretInterestRate(this.model[model]));
+
+        this.numberFormat[model] = modelDisplays.numberFormat;
+        this.percentFormat[model] = modelDisplays.percentFormat;
+        this.thousandthFormat[model] = modelDisplays.thousandthFormat;
+        this.tenThousandthFormat[model] = modelDisplays.tenThousandthFormat;
     }
 
     updateDisplay() {
