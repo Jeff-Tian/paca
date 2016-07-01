@@ -34,6 +34,8 @@ export class Rate {
     }
 
     static getDisplayFormatsOf(r) {
+        r = Number(r);
+        
         var model = {
             raw: r
         };

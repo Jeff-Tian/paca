@@ -74,14 +74,24 @@ export class RateComputing {
         this.model.totalInterest = this.model.endOut - this.model.beginIn;
         this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
 
+        this.computeAvgMonthlyInterestForOneOff();
+        this.computeAvgAnnualInterestForOneOff();
+        this.computeAvgDailyInterestForOneOff();
+    }
+
+    computeAvgMonthlyInterestForOneOff() {
         this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
         this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration);
+    }
 
-        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
-        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12);
-
+    computeAvgDailyInterestForOneOff() {
         this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
         this.model.dailyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
+    }
+
+    computeAvgAnnualInterestForOneOff() {
+        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
+        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12);
     }
 
     duration() {
@@ -90,5 +100,23 @@ export class RateComputing {
 
     endOut() {
         this.computeInterestForOneOff();
+    }
+
+    totalInterestRate() {
+        this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
+        this.model.endOut = this.model.beginIn + this.model.totalInterest;
+
+        this.computeAvgAnnualInterestForOneOff();
+        this.computeAvgMonthlyInterestForOneOff();
+        this.computeAvgDailyInterestForOneOff();
+    }
+
+    totalInterest() {
+        this.model.endOut = Number(this.model.beginIn) + Number(this.model.totalInterest);
+        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+
+        this.computeAvgAnnualInterestForOneOff();
+        this.computeAvgMonthlyInterestForOneOff();
+        this.computeAvgDailyInterestForOneOff();
     }
 }
