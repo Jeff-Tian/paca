@@ -56,6 +56,7 @@ export class RateComputing {
     }
 
     updateDisplays() {
+        this.displays.totalInterestRate = Rate.getDisplayFormatsOf(this.model.totalInterestRate);
         this.displays.annualInterestRate = Rate.getDisplayFormatsOf(this.model.annualInterestRate);
         this.displays.monthlyInterestRate = Rate.getDisplayFormatsOf(this.model.monthlyInterestRate);
         this.displays.dailyInterestRate = Rate.getDisplayFormatsOf(this.model.dailyInterestRate);
@@ -66,6 +67,10 @@ export class RateComputing {
     }
 
     beginIn() {
+        this.computeInterestForOneOff();
+    }
+
+    computeInterestForOneOff() {
         this.model.totalInterest = this.model.endOut - this.model.beginIn;
         this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
 
@@ -80,16 +85,10 @@ export class RateComputing {
     }
 
     duration() {
-        this.model.totalInterest = this.model.endOut - this.model.beginIn;
-        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+        this.computeInterestForOneOff();
+    }
 
-        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
-        this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration);
-
-        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
-        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12);
-
-        this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
-        this.model.dailyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
+    endOut() {
+        this.computeInterestForOneOff();
     }
 }
