@@ -89,9 +89,15 @@ export class RateComputing {
     }
 
     reverseToTotalRateByAvgMonthlyRateForOneOff() {
-        var method = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort : Rate.complexLongRateOfShort;
+        this.model.totalInterestRate = RateComputing.longRateOfShort(this.model.monthlyInterestRate, this.model.duration);
+    }
 
-        this.model.totalInterestRate = method(this.model.monthlyInterestRate, this.model.duration);
+    static longRateOfShort(r, duration) {
+        return Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(r, duration) : Rate.complexLongRateOfShort(r, duration);
+    }
+
+    reverseToTotalRateByAvgDailyMonthlyRateForOneOff() {
+        this.model.totalInterestRate = RateComputing.longRateOfShort(this.model.dailyInterestRate, this.model.duration * 30);
     }
 
     getAvgMonthlyInterestByTotalForOneOff() {
@@ -103,8 +109,12 @@ export class RateComputing {
     }
 
     computeAvgDailyInterestForOneOff() {
-        this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
+        this.getDailyInterestByTotalForOneOff();
         this.model.dailyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
+    }
+
+    getDailyInterestByTotalForOneOff() {
+        this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
     }
 
     computeAvgAnnualInterestForOneOff() {
@@ -192,5 +202,19 @@ export class RateComputing {
 
     computeEndOut() {
         this.model.endOut = Number(this.model.beginIn) + Number(this.model.totalInterest);
+    }
+
+    dailyInterestRate() {
+        this.reverseToTotalRateByAvgDailyMonthlyRateForOneOff();
+        this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
+        this.computeEndOut();
+
+        this.computeAvgAnnualInterestForOneOff();
+        this.computeAvgMonthlyInterestForOneOff();
+        this.getDailyInterestByTotalForOneOff();
+    }
+
+    dailyInterest() {
+
     }
 }
