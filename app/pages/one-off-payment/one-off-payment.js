@@ -6,7 +6,7 @@ import {Rate} from '../../finance/rate';
 @Component({
     templateUrl: 'build/pages/rate-computing/rate-computing.html'
 })
-export class RateComputing {
+export class OneOffPayment {
     static get parameters() {
         return [[NavController]];
     }
@@ -80,7 +80,7 @@ export class RateComputing {
     }
 
     reverseToTotalRateByAvgMonthlyRate() {
-        this.model.totalInterestRate = RateComputing.longRateOfShort(this.model.monthlyInterestRate, this.model.duration);
+        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.monthlyInterestRate, this.model.duration);
     }
 
     static longRateOfShort(r, duration) {
@@ -88,7 +88,7 @@ export class RateComputing {
     }
 
     reverseToTotalRateByAvgDailyMonthlyRate() {
-        this.model.totalInterestRate = RateComputing.longRateOfShort(this.model.dailyInterestRate, this.model.duration * 30);
+        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.dailyInterestRate, this.model.duration * 30);
     }
 
     getAvgMonthlyInterestByTotal() {
@@ -105,7 +105,7 @@ export class RateComputing {
     }
 
     getDailyInterestRateByTotalRate() {
-        this.model.dailyInterestRate = RateComputing.shortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
+        this.model.dailyInterestRate = OneOffPayment.shortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
     }
 
     static shortRateOfLong(r, duration) {
@@ -126,10 +126,10 @@ export class RateComputing {
 
     convertToAnnualFromTotal() {
         this.getAvgAnnualInterestByTotal();
-        this.getAvgAnnualInterestRateByTotal();
+        this.getAvgAnnualInterestRateByTotalForOneOff();
     }
 
-    getAvgAnnualInterestRateByTotal() {
+    getAvgAnnualInterestRateByTotalForOneOff() {
         this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12);
     }
 
@@ -137,7 +137,7 @@ export class RateComputing {
         this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
     }
 
-    reverseToTotalFromAnnual() {
+    reverseToTotalFromAnnualForOneOff() {
         this.model.totalInterestRate = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(this.model.annualInterestRate, this.model.duration / 12) : Rate.complexLongRateOfShort(this.model.annualInterestRate, this.model.duration / 12);
         this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
     }
@@ -169,7 +169,7 @@ export class RateComputing {
     }
 
     annualInterestRate() {
-        this.reverseToTotalFromAnnual();
+        this.reverseToTotalFromAnnualForOneOff();
         this.computeEndOut();
         this.getAvgAnnualInterestByTotal();
         this.computeAvgMonthlyInterest();
@@ -180,7 +180,7 @@ export class RateComputing {
         this.model.totalInterest = this.model.annualInterest * (this.model.duration / 12);
         this.computeEndOut();
         this.computeInterest();
-        this.getAvgAnnualInterestRateByTotal();
+        this.getAvgAnnualInterestRateByTotalForOneOff();
         this.computeAvgMonthlyInterest();
         this.computeAvgDailyInterest();
     }

@@ -1,0 +1,9 @@
+ion-navbar('*navbar'="")
+    ion-title
+        span 按月等额本息
+        button(clear="", '(click)'="updateValues()")
+            ion-icon(name="refresh")
+ion-content
+    include ../shared/total-annual-monthly-daily
+    + loanInfo
+    + interestInfo

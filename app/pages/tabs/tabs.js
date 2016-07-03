@@ -1,7 +1,7 @@
 import {Component} from '@angular/core'
 import {HomePage} from '../home-page/home-page';
-import {RateComputing} from '../rate-computing/rate-computing';
-import {AboutPage} from '../about-page/about-page';
+import {OneOffPayment} from '../one-off-payment/one-off-payment';
+import {FixedMortgagePayment} from '../fixed-mortgage-payment/fixed-mortgage-payment';
 import {Settings} from '../settings/settings';
 
 
@@ -13,8 +13,9 @@ export class TabsPage {
         // this tells the tabs component which Pages
         // should be each tab's root Page
         this.tab1Root = HomePage;
-        this.tabRateComputingRoot = RateComputing;
-        this.tab2Root = AboutPage;
+        this.tabRateComputingRoot = OneOffPayment;
+        this.tabFixedMortgage = FixedMortgagePayment;
+        // this.tab2Root = AboutPage;
         this.tabSettings = Settings;
     }
 }

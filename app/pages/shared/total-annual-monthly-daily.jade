@@ -1,21 +1,15 @@
-ion-navbar('*navbar'="")
-    ion-title
-        button(clear="", '(click)'="updateValues()")
-            ion-icon(name="refresh")
-        span 到期一次性还款借贷
-ion-content(padding="", class="page1")
+mixin loanInfo()
     ion-item
-        ion-label
-            | 期初借入(元):
+        ion-label 期初借入(元):
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('beginIn')", '[(ngModel)]'="model.beginIn", clearInput="", placeholder="期初借入 xxx 元")
     ion-item
-        ion-label
-            | 借贷时长(以月为单位):
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('duration')", '[(ngModel)]'="model.duration", clearInput="", placeholder="借贷时长(以月为单位)")
+        ion-label 借款期限(月):
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('duration')", '[(ngModel)]'="model.duration", clearInput="", placeholder="借款期限 xx 月")
     ion-item
-        ion-label
-            | 期末待还(元):
+        ion-label 期末待还(元):
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('endOut')", '[(ngModel)]'="model.endOut", clearInput="", placeholder="期末待还 xxx 元")
+
+mixin interestInfo
     ion-item
         ion-label(stacked="") 总利率: {{displays.totalInterestRate.percentFormat}};
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('totalInterestRate')", '[(ngModel)]'="model.totalInterestRate", clearInput="", placeholder="利率")
