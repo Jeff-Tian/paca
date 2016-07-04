@@ -2,7 +2,7 @@ ion-navbar('*navbar'="")
     ion-title
         button(clear="", '(click)'="updateValues()")
             ion-icon(name="refresh")
-        span 到期一次性还款借贷
+        span('[hidden]'="true") 到期一次性还款借贷
 ion-content
     include ../shared/total-annual-monthly-daily
     + loanInfo

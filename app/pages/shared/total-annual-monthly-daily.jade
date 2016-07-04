@@ -6,8 +6,8 @@ mixin loanInfo()
         ion-label 借款期限(月):
         ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('duration')", '[(ngModel)]'="model.duration", clearInput="", placeholder="借款期限 xx 月")
     ion-item
-        ion-label 期末待还(元):
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('endOut')", '[(ngModel)]'="model.endOut", clearInput="", placeholder="期末待还 xxx 元")
+        ion-label 总还款额(元):
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('endOut')", '[(ngModel)]'="model.endOut", clearInput="", placeholder="共需还款 xxx 元")
 
 mixin interestInfo
     ion-item

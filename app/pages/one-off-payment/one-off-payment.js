@@ -4,7 +4,7 @@ import {Settings} from '../settings/settings';
 import {Rate} from '../../finance/rate';
 
 @Component({
-    templateUrl: 'build/pages/rate-computing/rate-computing.html'
+    templateUrl: 'build/pages/one-off-payment/one-off-payment.html'
 })
 export class OneOffPayment {
     static get parameters() {
