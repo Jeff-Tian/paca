@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Settings} from '../settings/settings';
+import {PacaRate} from '../../finance/paca-rate';
 import {Rate} from '../../finance/rate';
 
 @Component({
@@ -17,7 +17,7 @@ export class FixedMortgagePayment {
 
         this.model = {
             beginIn: 123000,
-            duration: 24,
+            months: 24,
             endOut: 129862.2,
             totalInterestRate: 0,
             totalInterest: 0,
@@ -83,17 +83,17 @@ export class FixedMortgagePayment {
     }
 
     computeMonthlyPayment() {
-        var q = Math.pow(1 + this.model.monthlyInterestRate, this.model.duration);
+        var q = Math.pow(1 + this.model.monthlyInterestRate, this.model.months);
 
         this.model.monthlyPayment = this.model.beginIn * this.model.monthlyInterestRate * q / (q - 1);
     }
 
     computeEndOutByMonthlyPayment() {
-        this.model.endOut = this.model.monthlyPayment * this.model.duration;
+        this.model.endOut = this.model.monthlyPayment * this.model.months;
     }
 
     computeMonthlyPaymentByEndOut() {
-        this.model.monthlyPayment = this.model.endOut / this.model.duration;
+        this.model.monthlyPayment = this.model.endOut / this.model.months;
     }
 
     computeInterestInfo() {
@@ -107,16 +107,16 @@ export class FixedMortgagePayment {
     }
 
     computeDailyInterestInfo() {
-        this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
+        this.model.dailyInterest = this.model.totalInterest / (this.model.months * PacaRate.daysInAMonth);
         this.model.dailyInterestRate = this.model.dailyInterest / this.model.beginIn;
     }
 
     computeMonthlyInterest() {
-        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
+        this.model.monthlyInterest = this.model.totalInterest / this.model.months;
     }
 
     computeAnnualInterestInfo() {
-        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
+        this.model.annualInterest = this.model.totalInterest / (this.model.months / PacaRate.monthsInAYear);
         this.model.annualInterestRate = this.model.annualInterest / this.model.beginIn;
     }
 
@@ -125,12 +125,12 @@ export class FixedMortgagePayment {
         this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
     }
 
-    duration() {
+    months() {
         this.compute();
     }
 
     endOut() {
-        this.model.monthlyPayment = Number(this.model.endOut) / Number(this.model.duration);
+        this.model.monthlyPayment = Number(this.model.endOut) / Number(this.model.months);
 
         //https://www.zhihu.com/question/48132997
         this.computeInterestInfo();
@@ -193,7 +193,7 @@ export class FixedMortgagePayment {
     }
 
     computeTotalInterestByAnnualInterest() {
-        this.model.totalInterest = this.model.annualInterest * (this.model.duration / 12);
+        this.model.totalInterest = this.model.annualInterest * (this.model.months / PacaRate.monthsInAYear);
     }
 
     annualInterest() {
@@ -222,7 +222,7 @@ export class FixedMortgagePayment {
     }
 
     computeAnnualInterestInfoByMonthlyRate() {
-        this.model.annualInterestRate = this.model.monthlyInterestRate * 12;
+        this.model.annualInterestRate = PacaRate.longRateOfShort(this.model.monthlyInterestRate, PacaRate.monthsInAYear);
         this.model.annualInterest = this.model.beginIn * this.model.annualInterestRate;
     }
 
@@ -239,7 +239,7 @@ export class FixedMortgagePayment {
 
     dailyInterestRateGot() {
         this.computeAnnualInterestInfoByDailyRate();
-        this.computeTotalInterestByAnnualInterest()
+        this.computeTotalInterestByAnnualInterest();
         this.computeTotalInterestRateByTotalInterest();
         this.computeEndOutByTotalInterest();
         this.computeMonthlyInterestInfo();
@@ -247,7 +247,7 @@ export class FixedMortgagePayment {
     }
 
     computeAnnualInterestInfoByDailyRate() {
-        this.model.annualInterestRate = this.model.dailyInterestRate * 365;
+        this.model.annualInterestRate = PacaRate.annualRateByDaily(this.model.dailyInterestRate);
         this.model.annualInterest = this.model.beginIn * this.model.annualInterestRate;
     }
 

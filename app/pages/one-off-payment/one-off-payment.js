@@ -16,7 +16,7 @@ export class OneOffPayment {
 
         this.model = {
             beginIn: 10000,
-            duration: 12,
+            months: 12,
             endOut: 11000,
             totalInterestRate: 0,
             totalInterest: 0,
@@ -76,11 +76,11 @@ export class OneOffPayment {
     }
 
     getAvgMonthlyInterestRate() {
-        this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration);
+        this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months);
     }
 
     reverseToTotalRateByAvgMonthlyRate() {
-        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.monthlyInterestRate, this.model.duration);
+        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.monthlyInterestRate, this.model.months);
     }
 
     static longRateOfShort(r, duration) {
@@ -88,15 +88,15 @@ export class OneOffPayment {
     }
 
     reverseToTotalRateByAvgDailyMonthlyRate() {
-        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.dailyInterestRate, this.model.duration * 30);
+        this.model.totalInterestRate = OneOffPayment.longRateOfShort(this.model.dailyInterestRate, this.model.months * 30);
     }
 
     getAvgMonthlyInterestByTotal() {
-        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
+        this.model.monthlyInterest = this.model.totalInterest / this.model.months;
     }
 
     reverseToTotalByAvgMonthly() {
-        this.model.totalInterest = this.model.monthlyInterest * this.model.duration;
+        this.model.totalInterest = this.model.monthlyInterest * this.model.months;
     }
 
     computeAvgDailyInterest() {
@@ -105,7 +105,7 @@ export class OneOffPayment {
     }
 
     getDailyInterestRateByTotalRate() {
-        this.model.dailyInterestRate = OneOffPayment.shortRateOfLong(this.model.totalInterestRate, this.model.duration * 30);
+        this.model.dailyInterestRate = OneOffPayment.shortRateOfLong(this.model.totalInterestRate, this.model.months * 30);
     }
 
     static shortRateOfLong(r, duration) {
@@ -113,11 +113,11 @@ export class OneOffPayment {
     }
 
     getDailyInterestByTotal() {
-        this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
+        this.model.dailyInterest = this.model.totalInterest / (this.model.months * 30);
     }
 
     reverseToTotalInterestByDaily() {
-        this.model.totalInterest = this.model.dailyInterest * (this.model.duration * 30);
+        this.model.totalInterest = this.model.dailyInterest * (this.model.months * 30);
     }
 
     computeAvgAnnualInterest() {
@@ -130,19 +130,19 @@ export class OneOffPayment {
     }
 
     getAvgAnnualInterestRateByTotalForOneOff() {
-        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.duration / 12);
+        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months / 12);
     }
 
     getAvgAnnualInterestByTotal() {
-        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
+        this.model.annualInterest = this.model.totalInterest / (this.model.months / 12);
     }
 
     reverseToTotalFromAnnualForOneOff() {
-        this.model.totalInterestRate = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(this.model.annualInterestRate, this.model.duration / 12) : Rate.complexLongRateOfShort(this.model.annualInterestRate, this.model.duration / 12);
+        this.model.totalInterestRate = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(this.model.annualInterestRate, this.model.months / 12) : Rate.complexLongRateOfShort(this.model.annualInterestRate, this.model.months / 12);
         this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
     }
 
-    duration() {
+    months() {
         this.computeInterest();
     }
 
@@ -177,7 +177,7 @@ export class OneOffPayment {
     }
 
     annualInterest() {
-        this.model.totalInterest = this.model.annualInterest * (this.model.duration / 12);
+        this.model.totalInterest = this.model.annualInterest * (this.model.months / 12);
         this.computeEndOut();
         this.computeInterest();
         this.getAvgAnnualInterestRateByTotalForOneOff();
