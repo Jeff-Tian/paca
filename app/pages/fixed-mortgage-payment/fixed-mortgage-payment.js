@@ -230,4 +230,29 @@ export class FixedMortgagePayment {
         this.model.monthlyInterestRate = this.model.monthlyInterest / this.model.beginIn;
         this.monthlyInterestRateGot();
     }
+
+    dailyInterestRate() {
+        this.model.dailyInterest = this.model.beginIn * this.model.dailyInterestRate;
+
+        this.dailyInterestRateGot();
+    }
+
+    dailyInterestRateGot() {
+        this.computeAnnualInterestInfoByDailyRate();
+        this.computeTotalInterestByAnnualInterest()
+        this.computeTotalInterestRateByTotalInterest();
+        this.computeEndOutByTotalInterest();
+        this.computeMonthlyInterestInfo();
+        this.computeMonthlyPaymentByEndOut();
+    }
+
+    computeAnnualInterestInfoByDailyRate() {
+        this.model.annualInterestRate = this.model.dailyInterestRate * 365;
+        this.model.annualInterest = this.model.beginIn * this.model.annualInterestRate;
+    }
+
+    dailyInterest() {
+        this.model.dailyInterestRate = this.model.dailyInterest / this.model.beginIn;
+        this.dailyInterestRateGot();
+    }
 }
