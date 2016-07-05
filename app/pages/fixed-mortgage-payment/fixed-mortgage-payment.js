@@ -168,10 +168,40 @@ export class FixedMortgagePayment {
     }
 
     totalInterest() {
-        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+        this.computeTotalInterestRateByTotalInterest();
         this.computeEndOutByTotalInterest();
         this.computeMonthlyPaymentByEndOut();
         this.computeAnnualInterestInfo();
+        this.computeMonthlyInterestInfo();
+        this.computeDailyInterestInfo();
+    }
+
+    computeTotalInterestRateByTotalInterest() {
+        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+    }
+
+    annualInterestRate() {
+        this.model.annualInterest = this.model.beginIn * this.model.annualInterestRate;
+        this.computeTotalInterestByAnnualInterest();
+
+        this.computeTotalInterestRateByTotalInterest();
+
+        this.computeEndOutByTotalInterest();
+        this.computeMonthlyPaymentByEndOut();
+        this.computeMonthlyInterestInfo();
+        this.computeDailyInterestInfo();
+    }
+
+    computeTotalInterestByAnnualInterest() {
+        this.model.totalInterest = this.model.annualInterest * (this.model.duration / 12);
+    }
+
+    annualInterest() {
+        this.model.annualInterestRate = this.model.annualInterest / this.model.beginIn;
+        this.computeTotalInterestByAnnualInterest();
+        this.computeTotalInterestRateByTotalInterest();
+        this.computeEndOutByTotalInterest();
+        this.computeMonthlyPaymentByEndOut();
         this.computeMonthlyInterestInfo();
         this.computeDailyInterestInfo();
     }
