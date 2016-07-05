@@ -76,28 +76,53 @@ export class FixedMortgagePayment {
      * Ap^(n+1) - (A-a)p^n + a = 0
      */
     compute() {
+        this.computeMonthlyPayment();
+        this.computeEndOutByMonthlyPayment();
+        this.computeInterestInfo();
+        this.computeMonthlyInterestRate();
+    }
+
+    computeMonthlyPayment() {
         var q = Math.pow(1 + this.model.monthlyInterestRate, this.model.duration);
 
         this.model.monthlyPayment = this.model.beginIn * this.model.monthlyInterestRate * q / (q - 1);
-        this.computeEndOut();
-        this.computeInterestInfo();
     }
 
-    computeEndOut() {
+    computeEndOutByMonthlyPayment() {
         this.model.endOut = this.model.monthlyPayment * this.model.duration;
     }
 
+    computeMonthlyPaymentByEndOut() {
+        this.model.monthlyPayment = this.model.endOut / this.model.duration;
+    }
+
     computeInterestInfo() {
-        this.model.totalInterest = this.model.endOut - this.model.beginIn;
-        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+        this.computeTotalInterestInfo();
 
-        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
-        this.model.annualInterestRate = this.model.annualInterest / this.model.beginIn;
+        this.computeAnnualInterestInfo();
 
-        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
+        this.computeMonthlyInterest();
 
+        this.computeDailyInterestInfo();
+    }
+
+    computeDailyInterestInfo() {
         this.model.dailyInterest = this.model.totalInterest / (this.model.duration * 30);
         this.model.dailyInterestRate = this.model.dailyInterest / this.model.beginIn;
+    }
+
+    computeMonthlyInterest() {
+        this.model.monthlyInterest = this.model.totalInterest / this.model.duration;
+    }
+
+    computeAnnualInterestInfo() {
+        this.model.annualInterest = this.model.totalInterest / (this.model.duration / 12);
+        this.model.annualInterestRate = this.model.annualInterest / this.model.beginIn;
+    }
+
+    computeTotalInterestInfo() {
+        this.model.totalInterest = this.model.endOut - this.model.beginIn;
+        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
     }
 
     duration() {
@@ -118,8 +143,36 @@ export class FixedMortgagePayment {
     }
 
     monthlyPayment() {
-        this.computeEndOut();
+        this.computeEndOutByMonthlyPayment();
         this.computeInterestInfo();
         this.computeMonthlyInterestRate();
+    }
+
+    totalInterestRate() {
+        this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
+        this.computeEndOutByTotalInterest();
+
+        this.computeMonthlyPaymentByEndOut();
+        this.computeAnnualInterestInfo();
+        this.computeMonthlyInterestInfo();
+        this.computeDailyInterestInfo();
+    }
+
+    computeEndOutByTotalInterest() {
+        this.model.endOut = this.model.beginIn + this.model.totalInterest;
+    }
+
+    computeMonthlyInterestInfo() {
+        this.computeMonthlyInterest();
+        this.computeMonthlyInterestRate();
+    }
+
+    totalInterest() {
+        this.model.totalInterestRate = this.model.totalInterest / this.model.beginIn;
+        this.computeEndOutByTotalInterest();
+        this.computeMonthlyPaymentByEndOut();
+        this.computeAnnualInterestInfo();
+        this.computeMonthlyInterestInfo();
+        this.computeDailyInterestInfo();
     }
 }
