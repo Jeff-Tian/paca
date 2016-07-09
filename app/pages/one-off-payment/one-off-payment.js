@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Settings} from '../settings/settings';
+import {Config} from '../../config/config';
 import {Rate} from '../../finance/rate';
 
 @Component({
@@ -76,7 +76,7 @@ export class OneOffPayment {
     }
 
     getAvgMonthlyInterestRate() {
-        this.model.monthlyInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months);
+        this.model.monthlyInterestRate = Config.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months);
     }
 
     reverseToTotalRateByAvgMonthlyRate() {
@@ -84,7 +84,7 @@ export class OneOffPayment {
     }
 
     static longRateOfShort(r, duration) {
-        return Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(r, duration) : Rate.complexLongRateOfShort(r, duration);
+        return Config.get().simplifiedMode ? Rate.simpleLongRateOfShort(r, duration) : Rate.complexLongRateOfShort(r, duration);
     }
 
     reverseToTotalRateByAvgDailyMonthlyRate() {
@@ -109,7 +109,7 @@ export class OneOffPayment {
     }
 
     static shortRateOfLong(r, duration) {
-        return Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(r, duration) : Rate.complexShortRateOfLong(r, duration);
+        return Config.get().simplifiedMode ? Rate.simpleShortRateOfLong(r, duration) : Rate.complexShortRateOfLong(r, duration);
     }
 
     getDailyInterestByTotal() {
@@ -130,7 +130,7 @@ export class OneOffPayment {
     }
 
     getAvgAnnualInterestRateByTotalForOneOff() {
-        this.model.annualInterestRate = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months / 12);
+        this.model.annualInterestRate = Config.get().simplifiedMode ? Rate.simpleShortRateOfLong(this.model.totalInterestRate, this.model.months / 12) : Rate.complexShortRateOfLong(this.model.totalInterestRate, this.model.months / 12);
     }
 
     getAvgAnnualInterestByTotal() {
@@ -138,7 +138,7 @@ export class OneOffPayment {
     }
 
     reverseToTotalFromAnnualForOneOff() {
-        this.model.totalInterestRate = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort(this.model.annualInterestRate, this.model.months / 12) : Rate.complexLongRateOfShort(this.model.annualInterestRate, this.model.months / 12);
+        this.model.totalInterestRate = Config.get().simplifiedMode ? Rate.simpleLongRateOfShort(this.model.annualInterestRate, this.model.months / 12) : Rate.complexLongRateOfShort(this.model.annualInterestRate, this.model.months / 12);
         this.model.totalInterest = this.model.beginIn * this.model.totalInterestRate;
     }
 

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Settings} from '../settings/settings';
+import {Config} from '../../config/config';
 import {Rate} from '../../finance/rate';
 import {PacaRate} from '../../finance/paca-rate';
 
@@ -19,8 +19,8 @@ export class HomePage {
             monthlyInterestRate: null,
             dailyInterestRate: null,
 
-            simplifiedMode: Settings.get().simplifiedMode,
-            numberMode: Settings.get().numberMode
+            simplifiedMode: Config.get().simplifiedMode,
+            numberMode: Config.get().numberMode
         };
 
         this.numberFormat = {
@@ -46,9 +46,9 @@ export class HomePage {
         this.source = '';
 
         let self = this;
-        Settings.updated(function () {
-            self.model.simplifiedMode = Settings.get().simplifiedMode;
-            self.model.numberMode = Settings.get().numberMode;
+        Config.updated(function () {
+            self.model.simplifiedMode = Config.get().simplifiedMode;
+            self.model.numberMode = Config.get().numberMode;
 
             self.updateValues();
         });

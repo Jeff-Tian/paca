@@ -1,5 +1,5 @@
 import {Rate} from './rate';
-import {Settings} from '../pages/settings/settings';
+import {Config} from '../config/config.js';
 
 export class PacaRate {
     static get monthsInAYear() {
@@ -15,12 +15,12 @@ export class PacaRate {
     }
 
     static shortRateOfLong(r, periods) {
-        let m = Settings.get().simplifiedMode ? Rate.simpleShortRateOfLong : Rate.complexShortRateOfLong;
+        let m = Config.get().simplifiedMode ? Rate.simpleShortRateOfLong : Rate.complexShortRateOfLong;
         return m(r, periods);
     }
 
     static longRateOfShort(r, periods) {
-        let m = Settings.get().simplifiedMode ? Rate.simpleLongRateOfShort : Rate.complexLongRateOfShort;
+        let m = Config.get().simplifiedMode ? Rate.simpleLongRateOfShort : Rate.complexLongRateOfShort;
         return m(r, periods);
     }
 
