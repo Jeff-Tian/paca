@@ -16,7 +16,8 @@ export class Settings {
 
         this.model = {
             numberMode: Settings.get().numberMode,
-            simplifiedMode: Settings.get().simplifiedMode
+            simplifiedMode: Settings.get().simplifiedMode,
+            locale: Settings.get().locale || 'zh-CN'
         };
     }
 

@@ -11,7 +11,12 @@ ion-content(padding="", class="")
         ion-label(stacked="")
             | 简单模式 (年月日利率不使用复利模式)
         ion-toggle('[(ngModel)]'="model.simplifiedMode", '(ionChange)'="saveSettings()")
-        
+    ion-item
+        ion-label 语言
+        ion-select('[(ngModel)]'="model.locale")
+            ion-option(value="zh-CN") 简体中文
+            ion-option(value="en-US") 美式英文
+
     ion-list
         ion-list-header(class="contact-page-content")
             | 联系我们
