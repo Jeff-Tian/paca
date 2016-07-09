@@ -2,33 +2,33 @@ ion-navbar('*navbar'="")
     ion-title {{__('设置')}}
 
 ion-content(padding="", class="")
-    p 啪咔，协助你比较不同的利率，划不划算，一目了然！
+    p {{__('啪咔，协助你比较不同的利率，划不划算，一目了然！')}}
     ion-item
         ion-label(stacked="")
-            | 纯数字输入模式（不能输入%）
+            | {{__('纯数字输入模式（不能输入%）')}}
         ion-toggle('[(ngModel)]'="model.numberMode", '(ionChange)'="saveSettings()")
     ion-item
         ion-label(stacked="")
-            | 简单模式 (年月日利率不使用复利模式)
+            | {{__('简单模式 (年月日利率不使用复利模式)')}}
         ion-toggle('[(ngModel)]'="model.simplifiedMode", '(ionChange)'="saveSettings()")
     ion-item
-        ion-label 语言
-        ion-select('[(ngModel)]'="model.locale")
+        ion-label {{__('语言')}}
+        ion-select('[(ngModel)]'="model.locale", '(ionChange)'="localeChanged()")
             ion-option(value="zh-CN") 简体中文
-            ion-option(value="en-US") 美式英文
+            ion-option(value="en-US") English (US)
 
     ion-list
         ion-list-header(class="contact-page-content")
-            | 联系我们
+            | {{__('联系我们')}}
         ion-item
             ion-icon(name="logo-github", item-left="", class="contact-page-content")
-            | 主页：
+            | {{__('主页：')}}
 
             a(href="https://github.com/Jeff-Tian", target="_blank")
                 | https:github.comJeff-Tian
         ion-item
             ion-icon(name="logo-github", item-left="", class="contact-page-content")
-            | 源代码：
+            | {{__('源代码：')}}
 
             a(href="https://github.com/Jeff-Tian/paca", target="_blank")
                 | https:github.comJeff-Tianpaca

@@ -39,4 +39,8 @@ export class Settings extends Locale {
     saveSettings() {
         return Config.saveSettings(this.model);
     }
+
+    localeChanged() {
+        return Config.saveSettings(this.model);
+    }
 }
