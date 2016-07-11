@@ -35,38 +35,76 @@ var copyScripts = require('ionic-gulp-scripts-copy');
 
 var isRelease = argv.indexOf('--release') > -1;
 
-gulp.task('watch', ['clean'], function(done){
-  runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function(){
-      gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
-      gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
-      buildBrowserify({ watch: true }).on('end', done);
-    }
-  );
+gulp.task('watch', ['clean'], function (done) {
+    runSequence(
+        ['sass', 'html', 'fonts', 'scripts'],
+        function () {
+            gulpWatch('app/**/*.scss', function () {
+                gulp.start('sass');
+            });
+            gulpWatch('app/**/*.html', function () {
+                gulp.start('html');
+            });
+            buildBrowserify({watch: true}).on('end', done);
+        }
+    );
 });
 
-gulp.task('build', ['clean'], function(done){
-  runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function(){
-      buildBrowserify({
-        minify: isRelease,
-        browserifyOptions: {
-          debug: !isRelease
-        },
-        uglifyOptions: {
-          mangle: false
+gulp.task('build', ['clean'], function (done) {
+    runSequence(
+        ['sass', 'html', 'fonts', 'scripts'],
+        function () {
+            buildBrowserify({
+                minify: isRelease,
+                browserifyOptions: {
+                    debug: !isRelease
+                },
+                uglifyOptions: {
+                    mangle: false
+                }
+            }).on('end', done);
         }
-      }).on('end', done);
-    }
-  );
+    );
 });
 
 gulp.task('sass', buildSass);
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
 gulp.task('scripts', copyScripts);
-gulp.task('clean', function(){
-  return del('www/build');
+gulp.task('clean', function () {
+    return del('www/build');
+});
+
+var fs = require('fs');
+var sh = require('shelljs');
+
+function getAppVersion() {
+    var configXML = fs.readFileSync('./config.xml').toString();
+    var flag = '<widget id="com.ionicframework.paca478197" version="';
+    var index = configXML.indexOf(flag);
+    var index2 = configXML.indexOf('"', index + flag.length);
+    var version = configXML.substring(index + flag.length, index2);
+
+    return version;
+}
+
+gulp.task('version', function (done) {
+    console.log(getAppVersion());
+    done();
+});
+
+gulp.task('android-release', function (done) {
+    var fileName = 'paca' + getAppVersion() + '.apk';
+    var apkPath = '';
+
+    sh.rm(fileName);
+
+    sh.exec('ionic build --release android', function () {
+        done();
+        return;
+        
+        sh.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore -storepass 1050709 ' + apkPath + ' alias_name', function () {
+            sh.exec('zipalign -v 4 ' + apkPath + ' ' + fileName, done);
+        });
+    });
 });
