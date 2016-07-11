@@ -7,6 +7,6 @@ ion-content
     include ../shared/total-annual-monthly-daily
     + loanInfo
     ion-item
-        ion-label 月还款额
-        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyPayment')", '[(ngModel)]'="model.monthlyPayment", clearInput="", placeholder="月还款额 xxx 元")
+        ion-label {{__('月还款额: ')}}
+        ion-input(type="number", '(change)'="updateValues()", '(focus)'="changeSource('monthlyPayment')", '[(ngModel)]'="model.monthlyPayment", clearInput="", placeholder="{{__('月还款额 xxx 元')}}")
     + interestInfo

@@ -2,17 +2,19 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {PacaRate} from '../../finance/paca-rate';
 import {Rate} from '../../finance/rate';
+import {Locale} from '../../locale/locale';
 
 @Component({
     templateUrl: 'build/pages/fixed-mortgage-payment/fixed-mortgage-payment.html'
 })
 
-export class FixedMortgagePayment {
+export class FixedMortgagePayment extends Locale {
     static get parameters() {
         return [[NavController]];
     }
 
     constructor(_navController) {
+        super();
         this._navController = _navController;
 
         this.model = {

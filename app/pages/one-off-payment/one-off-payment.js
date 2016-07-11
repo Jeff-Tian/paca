@@ -2,16 +2,18 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Config} from '../../config/config';
 import {Rate} from '../../finance/rate';
+import {Locale} from '../../locale/locale';
 
 @Component({
     templateUrl: 'build/pages/one-off-payment/one-off-payment.html'
 })
-export class OneOffPayment {
+export class OneOffPayment extends Locale {
     static get parameters() {
         return [[NavController]];
     }
 
     constructor(_navController) {
+        super();
         this._navControler = _navController;
 
         this.model = {

@@ -3,16 +3,18 @@ import {NavController} from 'ionic-angular';
 import {Config} from '../../config/config';
 import {Rate} from '../../finance/rate';
 import {PacaRate} from '../../finance/paca-rate';
+import {Locale} from '../../locale/locale';
 
 @Component({
     templateUrl: 'build/pages/home-page/home-page.html'
 })
-export class HomePage {
+export class HomePage extends Locale {
     static get parameters() {
         return [[NavController]];
     }
 
     constructor(_navController) {
+        super();
         this._navController = _navController;
         this.model = {
             annualInterestRate: '12%',
