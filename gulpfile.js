@@ -94,7 +94,7 @@ gulp.task('version', function (done) {
 });
 
 gulp.task('android-release', function (done) {
-    var fileName = 'paca' + getAppVersion() + '.apk';
+    var fileName = 'paca_' + getAppVersion() + '.apk';
     var apkPath = '';
 
     sh.rm(fileName);
@@ -102,7 +102,7 @@ gulp.task('android-release', function (done) {
     sh.exec('ionic build --release android', function () {
         done();
         return;
-        
+
         sh.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore -storepass 1050709 ' + apkPath + ' alias_name', function () {
             sh.exec('zipalign -v 4 ' + apkPath + ' ' + fileName, done);
         });
