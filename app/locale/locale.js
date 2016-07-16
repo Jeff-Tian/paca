@@ -53,13 +53,13 @@ export class Locale {
                 '平均日利息': 'Average Daily Interests',
                 '月还款额: ': 'Monthly payment: ',
                 '月还款额 xxx 元': 'Pay xxx dollars monthly',
-                '利率转换': 'Rate converter',
                 '年利率:': 'Annual Interest Rate:',
                 '年利率': "Annual Interest Rate",
                 '月利率:': 'Monthly Interest Rate:',
                 '月利率': 'Monthly Interest Rate',
                 '日利率:': 'Daily Interest Rate:',
-                '日利率': 'Daily Interest Rate:'
+                '日利率': 'Daily Interest Rate:',
+                '按月等额本息': 'Fixed Mortgage'
             }
         };
     }

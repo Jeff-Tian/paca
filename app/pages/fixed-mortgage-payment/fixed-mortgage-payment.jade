@@ -1,8 +1,5 @@
 ion-navbar('*navbar'="")
-    ion-title
-        span('[hidden]'="true") 按月等额本息
-        button(clear="", '(click)'="updateValues()")
-            ion-icon(name="refresh")
+    ion-title {{__('按月等额本息')}}
 ion-content
     include ../shared/total-annual-monthly-daily
     + loanInfo

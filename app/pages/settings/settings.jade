@@ -1,8 +1,9 @@
 ion-navbar('*navbar'="")
     ion-title {{__('设置')}}
 
-ion-content(padding="", class="")
-    p {{__('啪咔，协助你比较不同的利率，划不划算，一目了然！')}}
+ion-content
+    ion-item
+        p {{__('啪咔，协助你比较不同的利率，划不划算，一目了然！')}}
     ion-item
         ion-label(stacked="")
             | {{__('纯数字输入模式（不能输入%）')}}

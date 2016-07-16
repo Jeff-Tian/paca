@@ -45,8 +45,6 @@ export class HomePage extends Locale {
             dailyInterestRate: null
         };
 
-        this.source = '';
-
         let self = this;
         Config.updated(function () {
             self.model.simplifiedMode = Config.get().simplifiedMode;
@@ -55,7 +53,9 @@ export class HomePage extends Locale {
             self.updateValues();
         });
 
-        this.annualInterestRateChanged();
+
+        this.source = 'annualInterestRateChanged';
+        this.updateValues();
     }
 
     annualInterestRateChanged() {
