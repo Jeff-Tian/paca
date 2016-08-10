@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.paca478197" version="0.0.3" xmlns="http://www.w3.org/ns/widgets"
+<widget id="com.ionicframework.paca478197" version="0.0.4" xmlns="http://www.w3.org/ns/widgets"
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>啪咔 - 理财计算器 Paca</name>
-    <description>啪咔</description>
+    <name>paca</name>
+    <description>啪咔 - 理财计算器 Paca</description>
     <author email="paca-paca@outlook.com" href="http://paca.jijiyy.me/">啪咔团队</author>
     <content src="index.html"/>
     <access origin="*"/>

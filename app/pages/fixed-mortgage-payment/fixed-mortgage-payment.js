@@ -161,7 +161,7 @@ export class FixedMortgagePayment extends Locale {
     }
 
     computeEndOutByTotalInterest() {
-        this.model.endOut = this.model.beginIn + this.model.totalInterest;
+        this.model.endOut = Number(this.model.beginIn) + Number(this.model.totalInterest);
     }
 
     computeMonthlyInterestInfo() {
