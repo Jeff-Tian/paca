@@ -4,7 +4,7 @@ export class Rate {
     }
 
     static complexShortRateOfLong(r, periods) {
-        return Math.pow(1 + r, 1 / periods) - 1;
+        return Math.pow(1 + Number(r), 1 / periods) - 1;
     }
 
     static simpleLongRateOfShort(r, periods) {
@@ -12,7 +12,7 @@ export class Rate {
     }
 
     static complexLongRateOfShort(r, periods) {
-        return Math.pow(1 + r, periods) - 1;
+        return Math.pow(1 + Number(r), periods) - 1;
     }
 
     static interpretInterestRate(r) {

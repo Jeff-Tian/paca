@@ -72,7 +72,7 @@ export class FixedMortgagePayment extends Locale {
      *
      * Let q = (1+i_m)^n, p = (1+i_m),
      *
-     * Aq=a(q-1)/(p-1)
+     * Aq=a(q-1)/(p-1), a = Aq(p-1)/(q-1) = A*q*i_m/(q-1)
      *
      * Aq(p-1)=aq-a
      * Ap^(n+1) - (A-a)p^n + a = 0
