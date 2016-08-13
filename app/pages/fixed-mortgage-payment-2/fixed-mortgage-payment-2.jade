@@ -1,0 +1,32 @@
+ion-navbar('*navbar'="")
+    ion-title {{__('(借入, 期限, 月还款)-->利率')}}
+ion-content
+    ion-item-group
+        ion-item-divider {{__('输入:')}}
+        ion-item
+            ion-label {{__('期初借入: ')}}
+            ion-input(type="number", '(change)'="updateValues()", '[(ngModel)]'="model.beginIn", clearInput="", placeholder="{{__('期初借入 xxx 元')}}")
+        ion-item
+            ion-label {{__('借款期限: ')}}
+            ion-input(type="number", '(change)'="updateValues()", '[(ngModel)]'="model.months", clearInput="", placeholder="{{__('借款 xxx 月')}}")
+        ion-item
+            ion-label {{__('月还款额: ')}}
+            ion-input(type="number", '[(ngModel)]'="model.monthlyPayment", placeholder="{{__('月还款额 xxx 元')}}", clearInput, '(change)'="updateValues()")
+
+    ion-item-group
+        ion-item-divider {{__('计算结果:')}}
+        ion-item
+            ion-label {{__('还款总额: ')}}
+            ion-input(type="number", '[(ngModel)]'="model.endOut", placeholder="{{__('共需还款 xxxx 元')}}", readonly="readonly")
+        ion-item
+            ion-label {{__('支付利息: ')}}
+            ion-input(type="number", '[(ngModel)]'="model.totalInterest", placeholder="{{__('共支付利息 xxxx 元')}}", readonly="readonly")
+        ion-item
+            ion-label {{__('年化利率: ')}} {{displays.annualInterestRate.percentFormat}};
+            ion-input(type="number", '[(ngModel)]'="model.annualInterestRate", placeholder="{{__('年化利率')}}", readonly="readonly")
+        ion-item
+            ion-label(stacked="") {{__('月利率: ')}} {{displays.monthlyInterestRate.percentFormat}};
+            ion-input(type="number", '[(ngModel)]'="model.monthlyInterestRate", placeholder="{{__('月利率')}}", readonly="readonly")
+        ion-item
+            ion-label(stacked="") {{__('平均日利率: ')}} {{displays.dailyInterestRate.percentFormat}}; {{displays.dailyInterestRate.thousandthFormat}}; {{displays.dailyInterestRate.tenThousandthFormat}};
+            ion-input(type="number", '[(ngModel)]'="model.dailyInterestRate", placeholder="{{__('平均日利率')}}", readonly="readonly")
