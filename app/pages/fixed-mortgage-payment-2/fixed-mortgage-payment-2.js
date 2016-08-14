@@ -3,7 +3,7 @@ import {NavController} from 'ionic-angular';
 import {PacaRate} from '../../finance/paca-rate';
 import {Rate} from '../../finance/rate';
 import {Locale} from '../../locale/locale';
-import {Newton} from '../../finance/newton';
+import {Bisection} from '../../finance/bisection';
 
 @Component({
     templateUrl: 'build/pages/fixed-mortgage-payment-2/fixed-mortgage-payment-2.html'
@@ -56,7 +56,7 @@ export class FixedMortgagePayment2 extends Locale {
     }
 
     compute() {
-        this.model.monthlyInterestRate = Newton.findMonthlyInterestRate(this.model.beginIn, this.model.monthlyPayment, this.model.months);
+        this.model.monthlyInterestRate = Bisection.findMonthlyInterestRate(this.model.beginIn, this.model.monthlyPayment, this.model.months);
 
         this.model.endOut = this.model.monthlyPayment * this.model.months;
         this.computeInterestInfo();
@@ -64,7 +64,7 @@ export class FixedMortgagePayment2 extends Locale {
 
     computeInterestInfo() {
         this.model.totalInterest = this.model.endOut - this.model.beginIn;
-        this.model.dailyInterestRate = PacaRate.dailyRateByAnnual(this.model.annualInterestRate);
+        this.model.dailyInterestRate = PacaRate.dailyRateByMonthly(this.model.monthlyInterestRate);
         this.model.annualInterestRate = PacaRate.annualRateByMonthly(this.model.monthlyInterestRate);
     }
 

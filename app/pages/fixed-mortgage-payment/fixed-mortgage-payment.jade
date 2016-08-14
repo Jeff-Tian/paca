@@ -2,7 +2,6 @@ ion-navbar('*navbar'="")
     ion-title {{__('(借入, 期限, 年利率)-->还款')}}
 ion-content
     ion-item-group
-        ion-item-divider {{__('输入:')}}
         ion-item
             ion-label {{__('期初借入: ')}}
             ion-input(type="number", '(change)'="updateValues()", '[(ngModel)]'="model.beginIn", clearInput="", placeholder="{{__('期初借入 xxx 元')}}")
