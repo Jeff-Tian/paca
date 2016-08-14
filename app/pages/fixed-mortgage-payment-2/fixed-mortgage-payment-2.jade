@@ -10,7 +10,7 @@ ion-content
             ion-input(type="number", '(change)'="updateValues()", '[(ngModel)]'="model.months", clearInput="", placeholder="{{__('借款 xxx 月')}}")
         ion-item
             ion-label {{__('月还款额: ')}}
-            ion-input(type="number", '[(ngModel)]'="model.monthlyPayment", placeholder="{{__('月还款额 xxx 元')}}", clearInput, '(change)'="updateValues()")
+            ion-input(type="number", '[(ngModel)]'="model.monthlyPayment", placeholder="{{__('月还款额 xxx 元')}}", clearInput="", '(change)'="updateValues()")
 
     ion-item-group
         ion-item-divider {{__('计算结果:')}}
