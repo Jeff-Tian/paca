@@ -60,7 +60,8 @@ export class Locale {
                 '日利率:': 'Daily Interest Rate:',
                 '日利率': 'Daily Interest Rate:',
                 '按月等额本息': 'Fixed Mortgage',
-                '到期一次还本付息': 'One off repayment'
+                '到期一次还本付息': 'One off repayment',
+                '现金流': 'Cash Flow'
             }
         };
     }

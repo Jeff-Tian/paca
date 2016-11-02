@@ -1,0 +1,1 @@
+<ion-navbar *navbar=""><ion-title>{{__('现金流管理')}}</ion-title></ion-navbar><ion-content padding=""><table><thead><tr><th>{{__('日期')}}</th><th>{{__('结余')}}</th><th>{{__('收入')}}</th><th>{{__('支出')}}</th></tr></thead><tbody><tr *ngFor="let flow of flows"><td>{{flow.date}}</td><td>{{flow.balance}}</td><td>{{flow.income}}</td><td>{{flow.payout}}</td></tr></tbody></table></ion-content>
