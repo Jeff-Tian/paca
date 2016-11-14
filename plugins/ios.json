@@ -7,23 +7,23 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
-        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
+            "PACKAGE_NAME": "io.ionic.starter"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "io.ionic.starter"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
+            "PACKAGE_NAME": "io.ionic.starter"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.ionic.starter"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.paca478197"
+            "PACKAGE_NAME": "io.ionic.starter"
         }
     },
     "dependent_plugins": {}

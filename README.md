@@ -1,6 +1,11 @@
 # Paca
 http://pa-ca.me
 
+# Make production 
+```
+npm run-script "ionic:build"
+```
+
 # App Store
 - https://itunes.apple.com/us/app/pa-ka-paca-li-cai-ji-suan-qi/id1131483169?l=zh&ls=1&mt=8
 - https://itunes.apple.com/cn/app/pa-ka-paca-li-cai-ji-suan-qi/id1131483169?l=zh&ls=1&mt=8

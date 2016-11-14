@@ -1,0 +1,18 @@
+ion-header
+    ion-navbar
+        ion-title {{__('利率转换')}}
+ion-content(padding="", class="page1")
+    ion-item
+        ion-label(stacked="")
+            | {{__('年利率:')}} {{(numberFormat.annualInterestRate)}}; {{percentFormat.annualInterestRate}}
+
+        ion-input(type="{{model.numberMode ? 'number' : 'text'}}", '(change)'="updateValues()", '(focus)'="changeSource('annualInterestRateChanged')", '[(ngModel)]'="model.annualInterestRate", clearInput="", placeholder="{{__('年利率')}}")
+    ion-item
+        ion-label(stacked="")
+            | {{__('月利率:')}} {{(numberFormat.monthlyInterestRate)}}; {{percentFormat.monthlyInterestRate}}
+
+        ion-input(type="{{model.numberMode ? 'number' : 'text'}}", '(change)'="updateValues()", '(focus)'="changeSource('monthlyInterestRateChanged')", '[(ngModel)]'="model.monthlyInterestRate", clearInput="", placeholder="{{__('月利率')}}")
+    ion-item
+        ion-label(stacked="")
+            | {{__('日利率:')}} {{numberFormat.dailyInterestRate}}; {{percentFormat.dailyInterestRate}}; {{thousandthFormat.dailyInterestRate}}; {{tenThousandthFormat.dailyInterestRate}}
+        ion-input(type="{{model.numberMode ? 'number' : 'text'}}", '(change)'="updateValues()", '(focus)'="changeSource('dailyInterestRateChanged')", '[(ngModel)]'="model.dailyInterestRate", clearInput="", placeholder="{{__('日利率')}}")
