@@ -21,16 +21,25 @@ ion-content
 
     ion-list
         ion-list-header(class="contact-page-content")
-            | {{__('联系我们')}}
+            | {{__('APP 下载')}}
         ion-item
-            ion-icon(name="logo-github", item-left="", class="contact-page-content")
-            | {{__('主页：')}}
+            ion-icon(name="logo-apple", item-left="", class="contact-page-content")
+            | {{__('App Store：')}}
 
-            a(href="https://github.com/Jeff-Tian", target="_blank")
-                | https:github.comJeff-Tian
+            a(href="https://itunes.apple.com/cn/app/pa-ka-paca-li-cai-ji-suan-qi/id1131483169?l=zh&ls=1&mt=8", target="_blank")
+                | https://itunes.apple.com/cn/app/pa-ka-paca-li-cai-ji-suan-qi/id1131483169?l=zh&ls=1&mt=8
         ion-item
-            ion-icon(name="logo-github", item-left="", class="contact-page-content")
-            | {{__('源代码：')}}
+            ion-icon(name="logo-android", item-left="", class="contact-page-content")
+            | {{__('Google Play：')}}
 
-            a(href="https://github.com/Jeff-Tian/paca", target="_blank")
-                | https:github.comJeff-Tianpaca
+            a(href="https://play.google.com/store/apps/details?id=com.ionicframework.paca478197", target="_blank")
+                | https://play.google.com/store/apps/details?id=com.ionicframework.paca478197
+        ion-item
+            ion-icon(name="", item-left="", class="contact-page-content") {{__('百度手机助手')}}
+            a(href="http://shouji.baidu.com/software/9797656.html" target="_blank") http://shouji.baidu.com/software/9797656.html
+        ion-item
+            ion-icon(name="", item-left="", class="contact-page-content") {{__('360 手机助手')}}
+            p
+                a(href="http://shouji.baidu.com/software/9797656.html" target="_blank") http://shouji.baidu.com/software/9797656.html
+            p
+                a(href="http://openbox.mobilem.360.cn/index/d/sid/3327984" target="_blank") http://openbox.mobilem.360.cn/index/d/sid/3327984
