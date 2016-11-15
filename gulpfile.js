@@ -19,7 +19,7 @@ gulp.task('version', function (done) {
 
 gulp.task('android-release', function (done) {
     var fileName = 'paca_' + getAppVersion() + '.apk';
-    var apkPath = '/Users/tianjie/paca/platforms/android/build/outputs/apk/android-release-unsigned.apk';
+    var apkPath = '/Users/tianjie/WebstormProjects/paca/platforms/android/build/outputs/apk/android-release-unsigned.apk';
 
     sh.rm(fileName);
 
