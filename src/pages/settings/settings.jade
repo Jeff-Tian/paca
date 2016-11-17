@@ -19,7 +19,7 @@ ion-content
             ion-option(value="zh-CN") 简体中文
             ion-option(value="en-US") English (US)
 
-    ion-list
+    ion-list([hidden]="hideAppDownloadInfo()")
         ion-list-header(class="contact-page-content")
             | {{__('APP 下载')}}
         ion-item

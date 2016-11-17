@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
 import {Locale} from '../../locale/locale';
 import {Config} from '../../config/config';
 
@@ -11,13 +11,14 @@ import {Config} from '../../config/config';
 export class Settings extends Locale {
     public model;
 
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl: NavController, public platForm: Platform) {
         super();
         this.model = {
             numberMode: Config.get().numberMode,
             simplifiedMode: Config.get().simplifiedMode,
             locale: Config.get().locale || 'zh-CN'
         };
+        this.platForm = platForm;
     }
 
     static save(settings) {
@@ -38,5 +39,9 @@ export class Settings extends Locale {
 
     localeChanged() {
         return Config.saveSettings(this.model);
+    }
+
+    hideAppDownloadInfo() {
+        return this.platForm.is('android') || this.platForm.is('ios');
     }
 }
