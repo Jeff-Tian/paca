@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
     'use strict';
     config.set({
 
@@ -13,13 +13,20 @@ module.exports = function(config) {
         files: [
             'node_modules/es6-shim/es6-shim.js',        // TypeError: undefined is not a constructor (evaluating 'new exports.Map()')
             'node_modules/reflect-metadata/Reflect.js', // 'Uncaught reflect-metadata shim is required when using class decorators'
+
+
+            // System.js for module loading
+            'node_modules/core-js/es6/symbol.js',
+
             'node_modules/zone.js/dist/zone.js',        // Zone.js dependencies (Zone undefined)
+            'https://cdn.polyfill.io/v2/polyfill.min.js?features=default,console.*,Intl.~locale.en&gated=1',
             'node_modules/zone.js/dist/jasmine-patch.js',
             'node_modules/zone.js/dist/async-test.js',
             'node_modules/zone.js/dist/fake-async-test.js',
             'app/**/*.spec.ts',
-            {pattern: 'node_modules/reflect-metadata/Reflect.js.map', included: false, served: true}, // 404 on the same
-            {pattern: 'www/build/**/*.html', included: false},
+            'test/**/*.test.ts',
+            { pattern: 'node_modules/reflect-metadata/Reflect.js.map', included: false, served: true }, // 404 on the same
+            { pattern: 'www/build/**/*.html', included: false },
         ],
 
         // list of files to exclude
@@ -39,7 +46,7 @@ module.exports = function(config) {
             transform: [
                 ['browserify-istanbul', {
                     instrumenter: require('isparta'),
-                    ignore: ['**/*.spec.ts','**/*.d.ts', '**/index.ts', '**/mocks.ts', '**/*.mock.ts'],
+                    ignore: ['**/*.spec.ts', '**/*.d.ts', '**/index.ts', '**/mocks.ts', '**/*.mock.ts'],
                 }]
             ],
             plugin: [
@@ -50,8 +57,8 @@ module.exports = function(config) {
         // options on how to report coverage:
         coverageReporter: {
             reporters: [
-                {type: 'text'},
-                {type: 'lcov', dir: 'coverage', subdir: '.'}
+                { type: 'text' },
+                { type: 'lcov', dir: 'coverage', subdir: '.' }
             ]
         },
 
