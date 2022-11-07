@@ -33,7 +33,7 @@
     "browserify-istanbul": "^3.0.1",
     "coverage": "^0.4.1",
     "del": "^5.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-tslint": "^8.1.4",
     "isparta": "^4.1.1",
     "karma": "^4.4.1",
